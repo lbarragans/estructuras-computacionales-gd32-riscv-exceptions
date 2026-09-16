@@ -67,7 +67,7 @@ main:
     not     t2, t2
     and     t1, t1, t2
     sw      t1, 0(t0)
-    li      t0, GPIOC_BOP
+    li      t0, GPIOC_BC
     li      t1, PC13_BIT
     sw      t1, 0(t0)
 
@@ -148,7 +148,7 @@ main:
     sw      zero, 0(t5)
     la      t0, g_pattern_step
     sw      zero, 0(t0)
-    li      t0, GPIOC_BC
+    li      t0, GPIOC_BOP
     li      t1, PC13_BIT
     sw      t1, 0(t0)
     la      t0, g_led_is_on
@@ -164,12 +164,12 @@ main:
     xori    t1, t1, 1
     sw      t1, 0(t0)
     beqz    t1, .Lsuccess_off
-    li      t0, GPIOC_BC
+    li      t0, GPIOC_BOP
     li      t2, PC13_BIT
     sw      t2, 0(t0)
     j       .Lstep_advance
 .Lsuccess_off:
-    li      t0, GPIOC_BOP
+    li      t0, GPIOC_BC
     li      t2, PC13_BIT
     sw      t2, 0(t0)
 .Lstep_advance:
@@ -202,12 +202,12 @@ main:
     xori    t1, t1, 1
     sw      t1, 0(t0)
     beqz    t1, .Lerror_off
-    li      t0, GPIOC_BC
+    li      t0, GPIOC_BOP
     li      t1, PC13_BIT
     sw      t1, 0(t0)
     j       .Lbackground
 .Lerror_off:
-    li      t0, GPIOC_BOP
+    li      t0, GPIOC_BC
     li      t1, PC13_BIT
     sw      t1, 0(t0)
 

@@ -74,6 +74,35 @@ automaticamente.
 
 | Implementacion | Estado |
 |---|---|
-| Referencia | funcional y seleccionada por CMake |
-| Assembly puro | fuente lista; integracion y hardware pendientes |
-| FreeRTOS puro | fuente lista; kernel, port e integracion pendientes |
+| Referencia | validada físicamente: tres destellos y pausa |
+| Assembly puro | validada físicamente: tres destellos y pausa |
+| FreeRTOS puro | validada físicamente con MSDK V1.0.3g: tres destellos y pausa |
+
+## Ejecutar las variantes
+
+Referencia original por JTAG/OpenOCD:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\\tools\\build_variant.ps1 -Variant original -Flash
+```
+
+Assembly puro por JTAG/OpenOCD:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\\tools\\build_variant.ps1 -Variant assembly -Flash
+```
+
+FreeRTOS por medio del MSDK oficial:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\\tools\\build_freertos.ps1 -Clean -Flash
+```
+
+Desde VS Code use **Terminal > Run Task** y elija `Build + Flash Original`,
+`Build + Flash Assembly` o `Build + Flash FreeRTOS`. FreeRTOS se integra
+automaticamente con el MSDK V1.0.3g.
+
+## Guía central de ejecución
+
+La [guía central GD32VW553](https://github.com/lbarragans/gd32vw553-vscode-cmake-guide)
+explica VS Code, JTAG, depuración de Assembly e integración FreeRTOS.

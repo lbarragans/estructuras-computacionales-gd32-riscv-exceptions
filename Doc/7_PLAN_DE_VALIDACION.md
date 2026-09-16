@@ -26,7 +26,13 @@ el `mret` ejecutado por la infraestructura oficial.
 Integrar kernel, port, heap y configuracion. Confirmar que la tarea de prueba
 se reanuda despues del trap, completa una sola prueba y notifica al indicador.
 
+La variante definitiva utiliza una entrada `exc_entry` mínima para no depender
+del desplazamiento variable producido por el contexto flotante del port. Debe
+compilarse con `tools/build_freertos.ps1 -Clean -Flash`; el script fuerza la
+fecha de las fuentes copiadas para impedir que Make reutilice objetos antiguos.
+
 ## Criterio de cierre
 
-Conservar ELF/LST, valores de los CSR, frame antes/despues y video o registro
-del LED. No declarar las alternativas validadas sin compilacion y placa.
+Las tres variantes fueron compiladas, grabadas y comprobadas en la placa real
+con WCH-Link CMSIS-DAP, backend `usb_bulk`, VID:PID `1a86:8012`, JTAG a 50 kHz.
+En todas se observó el patrón de tres destellos cortos seguido de una pausa.

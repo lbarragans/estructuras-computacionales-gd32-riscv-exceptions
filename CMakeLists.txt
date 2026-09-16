@@ -44,11 +44,26 @@ foreach(required_path IN LISTS REQUIRED_PATHS)
     endif()
 endforeach()
 
+set(APP_VARIANT "original" CACHE STRING "Aplicacion: original o assembly")
+set_property(CACHE APP_VARIANT PROPERTY STRINGS original assembly)
+
+if(APP_VARIANT STREQUAL "original")
+    set(APP_LOGIC_SOURCES
+        Src/main.c
+        Src/systimer.c
+        Src/trap_demo.c
+        Src/trigger_exception.S
+    )
+elseif(APP_VARIANT STREQUAL "assembly")
+    set(APP_LOGIC_SOURCES
+        Ensamblador_RISCV_Puro/main.S
+    )
+else()
+    message(FATAL_ERROR "APP_VARIANT debe ser original o assembly")
+endif()
+
 set(APP_SOURCES
-    Src/main.c
-    Src/systimer.c
-    Src/trap_demo.c
-    Src/trigger_exception.S
+    ${APP_LOGIC_SOURCES}
     "${UTILITIES_DIR}/gd32vw553h_eval.c"
     "${PERIPHERAL_DIR}/system_gd32vw55x.c"
 )

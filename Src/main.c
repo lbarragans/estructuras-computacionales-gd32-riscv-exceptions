@@ -26,11 +26,11 @@ static void led_set(uint8_t turn_on)
 {
     led_is_on = (turn_on != 0U) ? 1U : 0U;
 
-    /* El LED de la placa es activo en nivel bajo. */
+    /* En la placa validada PC13 en alto enciende el LED. */
     if (led_is_on != 0U) {
-        gpio_bit_reset(LED_GPIO_PORT, LED_GPIO_PIN);
-    } else {
         gpio_bit_set(LED_GPIO_PORT, LED_GPIO_PIN);
+    } else {
+        gpio_bit_reset(LED_GPIO_PORT, LED_GPIO_PIN);
     }
 }
 
